@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Avaliacao {
     static Scanner scanner = new Scanner(System.in);
 
-    public static ArrayList iniciarBanco(){
+    public static ArrayList iniciarBanco() {
         ArrayList<ArrayList> banco = new ArrayList<>();
 
         banco.add(new ArrayList<String>());
@@ -19,38 +19,38 @@ public class Avaliacao {
     }
 
     //Funções de cadastro de nome, valor e quantidade
-    public static void cadastrarProdutoNome(ArrayList<String> banco){
+    public static void cadastrarProdutoNome(ArrayList<String> banco) {
         System.out.println("Insira o nome do produto: ");
         String nome = scanner.next();
         banco.add(nome.toLowerCase().trim());
     }
 
-    public static void cadastrarProdutoValor(ArrayList<Double> banco){
+    public static void cadastrarProdutoValor(ArrayList<Double> banco) {
         try {
             System.out.println("Insira o valor do produto: ");
             banco.add(scanner.nextDouble());
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Favor inserir um valor válido (Ex: xx,xx");
         }
     }
 
-    public static void cadastrarProdutoQuantidade(ArrayList<Integer> banco){
+    public static void cadastrarProdutoQuantidade(ArrayList<Integer> banco) {
         try {
-            System.out.println("Insira o valor do produto: ");
+            System.out.println("Insira a quantidade em estoque do produto: ");
             banco.add(scanner.nextInt());
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Favor inserir um valor válido");
         }
     }
 
     //função de consultar produtos
-    public static void consultarProduto(ArrayList<ArrayList> banco){
+    public static void consultarProduto(ArrayList<ArrayList> banco) {
         ArrayList<ArrayList> bancoNomes = banco.get(0);
         System.out.println("Informe o nome do produto: ");
         String nome = scanner.next();
 
-        for (int i = 0; i < bancoNomes.size(); i++){
-            if(banco.get(0).get(i).equals(nome.toLowerCase().trim())){
+        for (int i = 0; i < bancoNomes.size(); i++) {
+            if (banco.get(0).get(i).equals(nome.toLowerCase().trim())) {
                 String nomeProduto = (String) banco.get(0).get(i);
                 Double valorProduto = (Double) banco.get(1).get(i);
                 Integer qtdProduto = (Integer) banco.get(2).get(i);
@@ -64,7 +64,7 @@ public class Avaliacao {
         }
     }
 
-    public static void adicionarNovoEstoque(ArrayList<ArrayList> banco){
+    public static void adicionarNovoEstoque(ArrayList<ArrayList> banco) {
         ArrayList<ArrayList> bancoNomes = banco.get(0);
         System.out.println("Informe o nome do produto: ");
         String nome = scanner.next();
@@ -79,12 +79,12 @@ public class Avaliacao {
                     System.out.println("Produto não encontrado");
                 }
             }
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Favor inserir um valor válido");
         }
     }
 
-    public static void venderProduto(ArrayList<ArrayList> banco){
+    public static void venderProduto(ArrayList<ArrayList> banco) {
         ArrayList<ArrayList> bancoNomes = banco.get(0);
         System.out.println("Informe o nome do produto: ");
         String nome = scanner.next();
@@ -93,7 +93,7 @@ public class Avaliacao {
             Integer qtd = scanner.nextInt();
             for (int i = 0; i < bancoNomes.size(); i++) {
                 if (banco.get(0).get(i).equals(nome.toLowerCase().trim())) {
-                    if((Integer) banco.get(2).get(i) >= qtd){
+                    if ((Integer) banco.get(2).get(i) >= qtd) {
                         Integer subtracao = (Integer) banco.get(2).get(i) - qtd;
                         banco.get(2).set(i, subtracao);
 
@@ -107,7 +107,7 @@ public class Avaliacao {
                 }
             }
 
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Favor inserir um valor válido");
         }
     }
@@ -115,11 +115,8 @@ public class Avaliacao {
 
     public static void main(String[] args) {
         ArrayList<ArrayList> banco = iniciarBanco();
-
-        int op = 99;
+        int op;
         try {
-
-
             do {
                 System.out.println("================Menu================");
                 System.out.println("Escolha o numero corresponde a operação que deseja fazer");
@@ -140,12 +137,10 @@ public class Avaliacao {
                     adicionarNovoEstoque(banco);
                 } else if (op == 4) {
                     venderProduto(banco);
-                } else if (op == 0) {
-                    System.out.println("Escolha uma opção válida");
                 }
             } while (op != 0);
-
-        } catch (InputMismatchException e){
+            System.out.println("============PROGRAMA ENCERRADO============");
+        } catch (InputMismatchException e) {
             System.out.println("Favor inserir um valor válido");
         }
     }
